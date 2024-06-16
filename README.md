@@ -30,7 +30,7 @@
 | category_id                         | integer    | null: false                    |
 | shipping_cost_id                    | integer    | null: false                    |
 | shipping_days_id                    | integer    | null: false                    |
-| shipping_origin_id                  | integer    | null: false                    |
+| prefecture_id                       | integer    | null: false                    |
 | user                                | references | null: false, foreign_key: true |
 
 ### Association
@@ -51,16 +51,17 @@
 - belongs_to  :item
 * has_one     :shipping_origin
 
-## shipping_origin table
+## shipping_origins table
 
-| Column              | Type       | Options       |
-|---------------------|------------|---------------|
-| postal_code         | integer    | null: false   |
-| prefecture_id       | integer    | null: false   |
-| city                | string     | null: false   |
-| street_number       | integer    | null: false   |
-| building_name       | string     | null: false   |
-| phone_number        | integer    | null: false   |
+| Column              | Type            | Options                        |
+|---------------------|-----------------|--------------------------------|
+| postal_code         | string          | null: false                    |
+| prefecture_id       | integer         | null: false                    |
+| city                | string          | null: false                    |
+| street_number       | string          | null: false                    |
+| building_name       | string          |                                |
+| phone_number        | string          | null: false                    |
+| order               | references      | null: false, foreign_key: true |
 
 
 ### Association
