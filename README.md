@@ -9,12 +9,14 @@
 | name               | string              | null: false               |
 | first_name         | string              | null: false               |
 | last_name          | string              | null: false               |
+| first_name_kana    | string              | null: false               |
+| last_name_kana     | string              | null: false               |
 | birthday           | date                | null: false               |
 
 ### Association
 
 * has_many   :items
-* has_many   :order
+* has_many   :orders
 
 
 ## items table
@@ -22,10 +24,13 @@
 | Column                              | Type       | Options                        |
 |-------------------------------------|------------|--------------------------------|
 | product_name                        | string     | null: false                    |
-| product_condition                   | string     | null: false                    |
-| category_id                         | integer    | null: false                    |
 | price                               | integer    | null: false                    |
 | product_description                 | text       | null: false                    |
+| product_condition_id                | integer    | null: false                    |
+| category_id                         | integer    | null: false                    |
+| shipping_cost_id                    | integer    | null: false                    |
+| shipping_days_id                    | integer    | null: false                    |
+| shipping_origin_id                  | integer    | null: false                    |
 | user                                | references | null: false, foreign_key: true |
 
 ### Association
@@ -38,21 +43,25 @@
 | Column         | Type       | Options                        |
 |----------------|------------|--------------------------------|
 | user           | references | null: false, foreign_key: true |
-| bought_product | references | null: false, foreign_key: true |
+| item           | references | null: false, foreign_key: true |
 
 ### Association
 
 - belongs_to  :user
-- belongs_to  :items
-- belongs_to  :shipping_origin
+- belongs_to  :item
+* has_one     :shipping_origin
 
 ## shipping_origin table
 
-| Column           | Type       | Options       |
-|------------------|------------|---------------|
-| shipping_const   | integer    | null: false   |
-| shipping_days    | integer    | null: false   |
-| shipping_origin  | string     | null: false   |
+| Column              | Type       | Options       |
+|---------------------|------------|---------------|
+| postal_code         | integer    | null: false   |
+| prefecture_id       | integer    | null: false   |
+| city                | string     | null: false   |
+| street_number       | integer    | null: false   |
+| building_name       | string     | null: false   |
+| phone_number        | integer    | null: false   |
+
 
 ### Association
 
