@@ -27,8 +27,8 @@ window.addEventListener('turbo:load', () => {
 
   function calculateFee(price) {
     //販売手数料を計算する関数を定義する。
-    return price * 0.10;
-    //価格の10%を計算
+    return Math.floor(price * 0.1);
+    //価格の10%を計算(小数点を切り捨てた整数値を返す。)
   }
 
   function calculateProfit(price, fee) {
