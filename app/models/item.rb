@@ -13,7 +13,7 @@ class Item < ApplicationRecord
 
   with_options presence: true do
     validates :product_name
-    validates :price
+    validates :price, numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999, message: "は300以上9999999以下の半角数字で入力してください" }
     validates :product_description
     validates :product_condition_id
     validates :category_id
@@ -24,7 +24,6 @@ class Item < ApplicationRecord
     validates :image
   end
 
-  validates :price, numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999, message: "は300以上9999999以下の半角数字で入力してください" }
 
   with_options numericality: { other_than: 1, message: "can't be blank" } do
     validates :category_id
