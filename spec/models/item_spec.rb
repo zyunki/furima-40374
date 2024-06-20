@@ -29,13 +29,13 @@ RSpec.describe Item, type: :model do
       it '価格が300未満では出品できない' do
         @item.price = 299
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price は300以上9999999以下の半角数字で入力してください")
+        expect(@item.errors.full_messages).to include('Price は300以上9999999以下の半角数字で入力してください')
       end
 
       it '価格が10000000以上では出品できない' do
-        @item.price = 10000000
+        @item.price = 10_000_000
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price は300以上9999999以下の半角数字で入力してください")
+        expect(@item.errors.full_messages).to include('Price は300以上9999999以下の半角数字で入力してください')
       end
 
       it '商品説明が空では出品できない' do
@@ -107,7 +107,7 @@ RSpec.describe Item, type: :model do
       it 'ユーザーが紐づいていなければ出品できない' do
         @item.user = nil
         @item.valid?
-        expect(@item.errors.full_messages).to include("User must exist")
+        expect(@item.errors.full_messages).to include('User must exist')
       end
 
       it '画像が空では出品できない' do
