@@ -7,9 +7,9 @@ class User < ApplicationRecord
 
   validates :name, presence: true
 
-  VALID_PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]{6,}+\z/i.freeze
+  VALID_PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]{6,}+\z/i
   validates :password, presence: true,
-                       length: { minimum: 6 }, 
+                       length: { minimum: 6 },
                        format: { with: VALID_PASSWORD_REGEX, message: 'は半角6文字以上と英小文字・数字それぞれ1文字以上含む必要があります' },
                        confirmation: true
 
@@ -21,6 +21,6 @@ class User < ApplicationRecord
 
   validates :birthday, presence: true
 
-  #has_many   :items
-  #has_many   :orders
+  has_many   :items
+  has_many   :orders
 end
