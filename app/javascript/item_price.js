@@ -31,9 +31,11 @@ window.addEventListener('turbo:load', () => {
     //価格の10%を計算(小数点を切り捨てた整数値を返す。)
   }
 
-  function calculateProfit(price, fee) {
-    //利益を計算する関数を定義する。
-    return price - fee;
-    //価格から手数料を引いた。
+  function calculateProfit(price) {
+    //calculateProfitという名前の関数を定義する。この関数にpriceを引数で受け取る。
+    const fee = calculateFee(price);
+    //feeという定数を宣言しcalculateFee関数を呼び出してその結果をfeeに格納している。calculateFee(price)は、引数として渡されたprice（アイテムの価格）を基に手数料を計算し、その結果を返します。
+    return Math.floor(price - fee);
+    //販売利益を計算(小数点を切り捨てた整数値を返す。)
   }
 });

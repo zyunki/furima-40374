@@ -1,6 +1,5 @@
 class Item < ApplicationRecord
-  belongs_to :user
-  has_one :order
+  # has_one :order
 
   has_one_attached :image
 
@@ -9,7 +8,8 @@ class Item < ApplicationRecord
   belongs_to :prefecture
   belongs_to :product_condition
   belongs_to :shipping_cost
-  belongs_to :shipping_days
+  belongs_to :shipping_day
+  belongs_to :user
 
   with_options presence: true do
     validates :product_name
@@ -20,9 +20,8 @@ class Item < ApplicationRecord
     validates :product_condition_id
     validates :category_id
     validates :shipping_cost_id
-    validates :shipping_days_id
+    validates :shipping_day_id
     validates :prefecture_id
-    validates :user_id
     validates :image
   end
 
@@ -31,6 +30,6 @@ class Item < ApplicationRecord
     validates :prefecture_id
     validates :product_condition_id
     validates :shipping_cost_id
-    validates :shipping_days_id
+    validates :shipping_day_id
   end
 end

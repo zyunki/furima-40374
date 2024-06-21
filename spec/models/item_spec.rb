@@ -2,8 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Item, type: :model do
   before do
-    @user = FactoryBot.create(:user)
-    @item = FactoryBot.build(:item, user: @user)
+    @item = FactoryBot.build(:item)
   end
 
   describe '商品出品' do
@@ -24,6 +23,12 @@ RSpec.describe Item, type: :model do
         @item.price = nil
         @item.valid?
         expect(@item.errors.full_messages).to include("Price can't be blank")
+      end
+
+      it '価格に半角数字以外が含まれている場合は出品できない（※半角数字以外が一文字でも含まれていれば良い）' do
+        @item.price = '3000a'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price は300以上9999999以下の半角数字で入力してください")
       end
 
       it '価格が300未満では出品できない' do
@@ -63,9 +68,9 @@ RSpec.describe Item, type: :model do
       end
 
       it '配送までの日数が空では出品できない' do
-        @item.shipping_days_id = nil
+        @item.shipping_day_id = nil
         @item.valid?
-        expect(@item.errors.full_messages).to include("Shipping days can't be blank")
+        expect(@item.errors.full_messages).to include("Shipping day can't be blank")
       end
 
       it '配送元の地域が空では出品できない' do
@@ -93,9 +98,9 @@ RSpec.describe Item, type: :model do
       end
 
       it '配送までの日数が1では出品できない' do
-        @item.shipping_days_id = 1
+        @item.shipping_day_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Shipping days can't be blank")
+        expect(@item.errors.full_messages).to include("Shipping day can't be blank")
       end
 
       it '配送元の地域が1では出品できない' do
