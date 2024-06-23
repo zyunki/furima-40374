@@ -28,7 +28,7 @@ RSpec.describe Item, type: :model do
       it '価格に半角数字以外が含まれている場合は出品できない（※半角数字以外が一文字でも含まれていれば良い）' do
         @item.price = '3000a'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price は300以上9999999以下の半角数字で入力してください")
+        expect(@item.errors.full_messages).to include('Price は300以上9999999以下の半角数字で入力してください')
       end
 
       it '価格が300未満では出品できない' do
