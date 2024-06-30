@@ -1,7 +1,14 @@
 class OrdersController < ApplicationController
+
+  def index
+    @item = Item.find(params[:item_id])
+    @order_form = OrderForm.new
+  end
+
   def create
     Order.create(order_params)
   end
+
 end
 
 private

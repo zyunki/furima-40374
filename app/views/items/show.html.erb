@@ -35,7 +35,7 @@
     <%= link_to "削除", item_path(@item), data: {turbo_method: :delete}, class:"item-destroy" %>
      <% else %>
     <%# 現在ログインしているユーザーと異なるユーザーがその商品の出品者、@item商品に注文がない、この両方が当てはまるとtrueを返す。 %>
-    <%= link_to "購入画面に進む", "#", data: { turbo: false }, class:"item-red-btn"%>
+    <%= link_to "購入画面に進む", item_orders_path(@item), class: "item-red-btn" %>
     <% end %>
     <% end %>
 
