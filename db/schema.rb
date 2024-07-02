@@ -64,20 +64,16 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_30_100915) do
   end
 
   create_table "shipping_origins", charset: "utf8", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "item_id", null: false
     t.string "postal_code", null: false
     t.integer "prefecture_id", null: false
     t.string "city", null: false
-    t.string "addresses", null: false
-    t.string "building"
+    t.string "street_unmber", null: false
+    t.string "building_name"
     t.string "phone_number", null: false
-    t.integer "order_id", null: false
+    t.bigint "order_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["item_id"], name: "index_shipping_origins_on_item_id"
     t.index ["order_id"], name: "index_shipping_origins_on_order_id"
-    t.index ["user_id"], name: "index_shipping_origins_on_user_id"
   end
 
   create_table "users", charset: "utf8", force: :cascade do |t|
@@ -101,4 +97,5 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_30_100915) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "items", "users"
+  add_foreign_key "shipping_origins", "orders"
 end

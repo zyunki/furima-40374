@@ -1,6 +1,6 @@
 class OrderForm
   include ActiveModel::Model
-  attr_accessor :user_id, :item_id, :postal_code, :prefecture_id, :city, :street_unmber, :building, :phone_number
+  attr_accessor :user_id, :item_id, :postal_code, :prefecture_id, :city, :street_unmber, :building_name, :phone_number
 
   # バリデーションの定義
   with_options presence: true do
@@ -18,6 +18,6 @@ class OrderForm
     order = Order.create(user_id: user_id, item_id: item_id)
 
     # 配送先情報を保存
-    ShippingAddress.create(postal_code: postal_code, prefecture_id: prefecture_id, city: city, street_unmber: street_unmber, building_name: building_name, phone_number: phone_number, order_id: order.id)
+    ShippingOrigin.create(postal_code: postal_code, prefecture_id: prefecture_id, city: city, street_unmber: street_unmber, building_name: building_name, phone_number: phone_number, order_id: order.id)
   end
 end
