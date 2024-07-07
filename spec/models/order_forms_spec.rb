@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe OrderForm, type: :model do
   before do
     user = FactoryBot.create(:user)
-    item = FactoryBot.create(:item, user: user)
+    item = FactoryBot.create(:item, user:)
     @order_form = FactoryBot.build(:order_form, user_id: user.id, item_id: item.id)
   end
 
@@ -39,7 +39,7 @@ RSpec.describe OrderForm, type: :model do
       it 'postal_codeが「3桁ハイフン4桁」の半角文字列のみ保存可能' do
         @order_form.postal_code = '1234567'
         @order_form.valid?
-        expect(@order_form.errors.full_messages).to include("Postal code is invalid. Include hyphen(-)")
+        expect(@order_form.errors.full_messages).to include('Postal code is invalid. Include hyphen(-)')
       end
 
       it 'prefectureを選択していないと保存できない' do
@@ -69,10 +69,10 @@ RSpec.describe OrderForm, type: :model do
       it 'phone_numberは10桁以上11桁以内の半角数値のみ保存可能）' do
         @order_form.phone_number = '090-1234-5678'
         @order_form.valid?
-        expect(@order_form.errors.full_messages).to include("Phone number must be numeric, half-width and either 10 or 11 digits long")
+        expect(@order_form.errors.full_messages).to include('Phone number must be numeric, half-width and either 10 or 11 digits long')
       end
 
-      it "tokenが空では登録できないこと" do
+      it 'tokenが空では登録できないこと' do
         @order_form.token = nil
         @order_form.valid?
         expect(@order_form.errors.full_messages).to include("Token can't be blank")
