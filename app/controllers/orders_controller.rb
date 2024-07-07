@@ -1,6 +1,7 @@
 class OrdersController < ApplicationController
   before_action :set_item, only: [:index, :create]
   before_action :authenticate_user!
+  before_action :check_order_status, only: [:index, :create]
 
   def index
     gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
@@ -37,4 +38,10 @@ end
 
 def set_item
   @item = Item.find(params[:item_id])
+end
+
+def check_order_status
+  if @item.order.present?
+    redirect_to root_path, alert: 'この商品は既に購入されています。'
+  end
 end
