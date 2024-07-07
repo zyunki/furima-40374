@@ -1,6 +1,6 @@
 class OrderForm
   include ActiveModel::Model
-  attr_accessor :user_id, :item_id, :postal_code, :prefecture_id, :city, :street_number, :building_name, :phone_number
+  attr_accessor :user_id, :item_id, :postal_code, :prefecture_id, :city, :street_number, :building_name, :phone_number, :token
 
   # バリデーションの定義
   with_options presence: true do
@@ -11,6 +11,7 @@ class OrderForm
     validates :city
     validates :street_number
     validates :phone_number, format: { with: /\A\d{10,11}\z/, message: "must be numeric, half-width and either 10 or 11 digits long" }
+    validates :token, presence: true
   end
 
   def save
