@@ -134,10 +134,10 @@
         <div class='item-img-content'>
          <%= image_tag item.image.attached? ? url_for(item.image) : "item-sample.png", class: "item-img" %>
 
-          <%# <% if item.order.present? %>
-          <%# <div class='sold-out'> %>
-            <%# <span>Sold Out!!</span> %>
-          <%# </div> %>
+          <% if item.order.present? %>
+           <div class='sold-out'> 
+            <span>Sold Out!!</span>
+          </div>
           <% end %>
 
         </div>
@@ -155,7 +155,7 @@
         </div>
         <% end %>
       </li>
-      <%# <% end %> 
+      <% end %> 
 
       <% else %>
       <li class='list'>
