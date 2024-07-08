@@ -12,7 +12,7 @@ class OrderForm
     validates :street_number
     validates :phone_number,
               format: { with: /\A\d{10,11}\z/, message: 'must be numeric, half-width and either 10 or 11 digits long' }
-    validates :token, presence: true
+    validates :token
   end
 
   def save
