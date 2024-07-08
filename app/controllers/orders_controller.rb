@@ -2,6 +2,7 @@ class OrdersController < ApplicationController
   before_action :set_item, only: [:index, :create]
   before_action :authenticate_user!
   before_action :check_order_status, only: [:index, :create]
+  before_action :check_seller
 
   def index
     gon.public_key = ENV['PAYJP_PUBLIC_KEY']
@@ -46,4 +47,10 @@ def check_order_status
   return unless @item.order.present?
 
   redirect_to root_path, alert: 'この商品は既に購入されています。'
+end
+
+def check_seller
+  if current_user.id == @item.user_id
+    redirect_to root_path, alert: "自身の商品を購入することはできません。"
+  end
 end
