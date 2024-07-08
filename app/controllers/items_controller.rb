@@ -1,6 +1,7 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :set_item, only: [:show, :edit, :update, :destroy]
+  before_action :check_item_status, only: [:edit, :update]
   before_action :contributor_confirmation, only: [:edit, :update, :destroy]
 
   def index
@@ -49,6 +50,14 @@ class ItemsController < ApplicationController
 
   def set_item
     @item = Item.find(params[:id])
+  end
+
+  def check_item_status
+    if @item.order.present?
+      redirect_to root_path, alert: 'この商品は既に売却されています。'
+    elsif current_user.id != @item.user_id
+      redirect_to root_path, alert: 'あなたにはこのページへのアクセス権がありません。'
+    end
   end
 
   def contributor_confirmation
