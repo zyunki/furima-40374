@@ -66,7 +66,19 @@ RSpec.describe OrderForm, type: :model do
         expect(@order_form.errors.full_messages).to include("Phone number can't be blank")
       end
 
-      it 'phone_numberは10桁以上11桁以内の半角数値のみ保存可能）' do
+      it 'phone_numberが9桁以下の場合保存できない' do
+        @order_form.phone_number = '123456789'
+        @order_form.valid?
+        expect(@order_form.errors.full_messages).to include('Phone number must be numeric, half-width and either 10 or 11 digits long')
+      end
+
+      it 'phone_numberが12桁以上の場合保存できない' do
+        @order_form.phone_number = '1234567890123'
+        @order_form.valid?
+        expect(@order_form.errors.full_messages).to include('Phone number must be numeric, half-width and either 10 or 11 digits long')
+      end
+
+      it 'phone_numberに半角数字以外が含まれている場合保存できない' do
         @order_form.phone_number = '090-1234-5678'
         @order_form.valid?
         expect(@order_form.errors.full_messages).to include('Phone number must be numeric, half-width and either 10 or 11 digits long')
