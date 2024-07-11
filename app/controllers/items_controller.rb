@@ -5,7 +5,7 @@ class ItemsController < ApplicationController
   before_action :contributor_confirmation, only: [:edit, :update, :destroy]
 
   def index
-    @items = Item.order(created_at: :asc)
+    @items = Item.order(created_at: :desc)
   end
 
   def new
