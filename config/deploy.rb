@@ -5,7 +5,7 @@ lock '3.19.1'
 set :application, 'furima-40374'
 
 # どのリポジトリからアプリをpullするかを指定する
-set :repo_url,  'git@https://github.com/zyunki/furima-40374'
+set :repo_url,  'https://github.com/zyunki/furima-40374'
 set :branch, 'main'
 
 # バージョンが変わっても共通で参照するディレクトリを指定
